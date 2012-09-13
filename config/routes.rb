@@ -1,4 +1,8 @@
 GalleryApp::Application.routes.draw do
-  get "users/new"
+  resources :users
+  root to: 'static_pages#home'
+  #get "static_pages/home"
+
+  #get "users/new"
   match '/signup', to: 'users#new'
 end
