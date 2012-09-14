@@ -8,6 +8,26 @@ describe "User Pages" do
     before { visit signup_path }
     it {should have_selector('h1', text: 'Sign Up')}
     it {should have_selector('title', text: 'Sign Up')}
+
+    let(:submit) { "Create my account" }
+    describe "with invalid details" do
+      it "should not create user" do
+        expect { click_button submit }.not_to change(User, :count)
+      end
+    end
+
+    describe "with valid details" do
+      before do
+        fill_in "Name", with: "Jim Morrison"
+        fill_in "Email", with: "jim@roadhouse-blues.com"
+        fill_in "Password", with: "morrison"
+        fill_in "Confirm Password", with: "morrison"
+      end
+      it "should create user" do
+        expect {click_button submit}.to change(User, :count).by(1)
+      end
+    end
+
   end
 
   describe "Profile page" do
@@ -15,4 +35,6 @@ describe "User Pages" do
     before { visit user_path(user) }
     it { should have_selector('title', text: user.name) }
   end
+
+
 end
