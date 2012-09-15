@@ -30,6 +30,7 @@ describe User do
   it {should respond_to :password}
   it {should respond_to :password_confirmation}
   it {should respond_to :authenticate}
+  it {should respond_to :remember_token}
 
   it {should be_valid}
 
@@ -65,6 +66,8 @@ describe User do
     before {@user.save}
     let(:db_user) { User.find_by_email(@user.email) }
 
+    its(:remember_token) {should_not be_blank}
+
     describe "with valid password" do
       it { should == db_user.authenticate(@user.password)}
     end
@@ -74,6 +77,7 @@ describe User do
       end
 
     end
+
   end
 
 
