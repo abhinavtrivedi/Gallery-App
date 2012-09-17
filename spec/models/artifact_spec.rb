@@ -1,22 +1,30 @@
 require 'spec_helper'
 
 describe Artifact do
-  let(:user) {FactoryGirl.create(:user)}
-  before do
-    @artifact = user.artifacts.build(title: "New Artifact")
-  end
+  #let(:user) {FactoryGirl.create(:user)}
+  let(:artifact) {FactoryGirl.create(:artifact)}
+  #before do
+  #  @artifact = user.artifacts.build(title: "New Artifact")
+  #end
 
-  subject{@artifact}
+  subject{artifact}
 
   it {should respond_to(:title)}
   it {should respond_to(:user_id)}
   it {should respond_to(:user)}
-  its(:user) { should == user}
+  it {should respond_to(:sample)}
+  it {should respond_to(:description)}
+  #its(:user) { should == user}
 
   it {should be_valid}
 
   describe "without title" do
-    before {@artifact.title = nil}
+    before {artifact.title = nil}
+    it {should_not be_valid}
+  end
+
+  describe "without sample image" do
+    before {artifact.sample = nil}
     it {should_not be_valid}
   end
 
@@ -27,6 +35,7 @@ describe Artifact do
   end
 =end
 
+=begin
   describe "accessible attributes" do
     it "should not allow access to artist_id" do
       expect do
@@ -34,4 +43,5 @@ describe Artifact do
       end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end
+=end
 end
