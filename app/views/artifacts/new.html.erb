@@ -1,0 +1,15 @@
+<% provide(:title, 'New Artifact') %>
+<h1>Create new Artifact</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@artifact) do |f| %>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+
+        <%= f.label :sample, "Choose a sample image" %>
+        <%= f.file_field :sample %>
+
+        <%= f.submit "Create new artifact", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

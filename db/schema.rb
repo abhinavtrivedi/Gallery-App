@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120915065817) do
+ActiveRecord::Schema.define(:version => 20120917081748) do
+
+  create_table "artifacts", :force => true do |t|
+    t.string   "title"
+    t.integer  "artist_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "user_id"
+    t.string   "sample_file_name"
+    t.string   "sample_content_type"
+    t.integer  "sample_file_size"
+    t.datetime "sample_updated_at"
+  end
+
+  add_index "artifacts", ["user_id"], :name => "index_artifacts_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

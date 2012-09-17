@@ -1,6 +1,9 @@
 GalleryApp::Application.routes.draw do
+  #get "artifacts/new"
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :artifacts
 
   root to: 'static_pages#home'
   #get "static_pages/home"

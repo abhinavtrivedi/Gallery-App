@@ -5,4 +5,9 @@ FactoryGirl.define do
     password "morrison"
     password_confirmation "morrison"
   end
+
+  factory :artifact do
+    title "New Artifact"
+    user
+  end
 end
