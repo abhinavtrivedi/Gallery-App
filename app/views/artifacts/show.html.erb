@@ -1,3 +1,7 @@
 <% provide(:title, @artifact.title) %>
 <h1><%= @artifact.title %> by <%= @artifact.user.name %></h1>
 <%= image_tag @artifact.sample.url :medium %>
+<ul>
+  <li><%= @artifact.description %></li>
+  <li>$ <%= @artifact.price %></li>
+</ul>

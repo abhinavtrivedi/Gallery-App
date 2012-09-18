@@ -6,7 +6,7 @@ describe Artifact do
   before do
     #artifact.user = user
     #artifact.user_id = user.id
-    @artifact = user.artifacts.build(title: "New Artifact", sample: File.open('spec/support/temp.jpg'))
+    @artifact = user.artifacts.build(title: "New Artifact", sample: File.open('spec/support/temp.jpg'), price: 100)
   end
 
   subject{@artifact}
@@ -16,6 +16,7 @@ describe Artifact do
   it {should respond_to(:user_id)}
   it {should respond_to(:sample)}
   it {should respond_to(:description)}
+  it {should respond_to(:price)}
   its(:user) { should == user}
 
   it {should be_valid}
@@ -32,6 +33,11 @@ describe Artifact do
 
   describe "without user_id" do
     before {@artifact.user_id = nil}
+    it {should_not be_valid}
+  end
+
+  describe "without price" do
+    before {@artifact.price = nil}
     it {should_not be_valid}
   end
 

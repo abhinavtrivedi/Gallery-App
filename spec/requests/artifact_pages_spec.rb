@@ -11,7 +11,10 @@ describe "Artifact Pages" do
 
       #artifact.user = user
       #artifact.user_id = user.id
-      @artifact = user.artifacts.build(title: "New Artifact", sample: File.open('spec/support/temp.jpg'))
+      @artifact = user.artifacts.build(title: "New Artifact",
+                                       sample: File.open('spec/support/temp.jpg'),
+                                       description: "This a brand new Artifact",
+                                       price: 100)
 
     end
 
@@ -32,10 +35,19 @@ describe "Artifact Pages" do
       it {should have_link('Sign out')}
       it {should have_selector('title', text: 'New Artifact')}
       it {should have_selector('h1', text: 'Create new Artifact')}
+
       it {should have_selector('label', text: 'Title')}
       it {should have_field('artifact_title')}
+
+      it {should have_selector('label', text: 'Description')}
+      it {should have_field('artifact_description')}
+
+      it {should have_selector('label', text: 'Price')}
+      it {should have_field('artifact_price')}
+
       it {should have_selector('label', text: 'Choose a sample image')}
       it {should have_field('artifact_sample', type: 'file')}
+
       it {should have_button submit}
 
       describe "with no content" do
@@ -52,7 +64,9 @@ describe "Artifact Pages" do
 
       describe "with valid content" do
         before do
-          fill_in "Title", with: "My New Artifact"
+          fill_in "Title", with: @artifact.title
+          fill_in "Description", with: @artifact.description
+          fill_in "Price", with: @artifact.price
           attach_file('Choose a sample image', 'spec/support/temp.jpg')
         end
 
@@ -62,7 +76,7 @@ describe "Artifact Pages" do
 
         describe "after saving artifact" do
           before {click_button submit}
-          let(:artifact) {Artifact.find_by_title("My New Artifact")}
+          let(:artifact) {Artifact.find_by_title(@artifact.title)}
 
           it {should have_selector('title', text: artifact.title)}
           it {should have_selector('h1', text: artifact.title)}
