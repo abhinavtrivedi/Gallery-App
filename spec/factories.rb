@@ -10,5 +10,7 @@ FactoryGirl.define do
     title "New Artifact"
     user
     sample File.open('spec/support/temp.jpg')
+    description "This is a new Artifact"
+    price 100
   end
 end

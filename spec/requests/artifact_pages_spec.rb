@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe "Artifact Pages" do
 
+
   subject {page}
 
-  describe "New artifact" do
+  describe "new artifact" do
     let(:user) {FactoryGirl.create(:user)}
     #let(:artifact) {FactoryGirl.create(:artifact)}
     before do
@@ -17,6 +18,8 @@ describe "Artifact Pages" do
                                        price: 100)
 
     end
+
+
 
     let(:submit) {"Create new artifact"}
 
@@ -94,7 +97,7 @@ describe "Artifact Pages" do
 
   end
 
-  describe "All Artifacts" do
+  describe "all artifacts" do
     before { visit artifacts_path }
 
     it {should have_selector('title', text: 'All Artifacts')}
@@ -103,5 +106,21 @@ describe "Artifact Pages" do
         page.should have_selector('li', text: artifact.title)
       end
     end
+  end
+
+  describe "show artifact" do
+    let(:artifact) {FactoryGirl.create(:artifact)}
+    before do
+      visit artifact_path(artifact)
+    end
+
+    it {should have_selector('title', text: artifact.title)}
+    it {should have_selector('h1', text: artifact.title)}
+    it {should have_selector('li', text: artifact.description)}
+    it {should have_selector('li', integer: artifact.price)}
+    it {should have_selector('h1', text: artifact.user.name)}
+    it {should have_selector('img')}
+
+    it {should have_link(artifact.user.name)}
   end
 end

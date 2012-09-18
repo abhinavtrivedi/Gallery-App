@@ -4,4 +4,5 @@
 <ul>
   <li><%= @artifact.description %></li>
   <li>$ <%= @artifact.price %></li>
+  <li>Created by:  <%= link_to @artifact.user.name, @artifact.user %></li>
 </ul>

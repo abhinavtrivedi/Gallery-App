@@ -3,7 +3,11 @@ class ArtifactsController < ApplicationController
   #before_filter :correct_user, only: [:new, :create]
 
   def index
-    @artifacts = Artifact.all
+    if @user.nil?
+      @artifacts = Artifact.all
+    else
+      @artifacts = @user.artifacts
+    end
   end
 
   def new

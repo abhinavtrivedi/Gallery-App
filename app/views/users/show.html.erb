@@ -6,6 +6,9 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <ul>
+        <li><%= link_to 'My Gallery', artifacts_path(@user) %></li>
+      </ul>
     </section>
   </aside>
 </div>
