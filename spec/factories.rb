@@ -8,7 +8,7 @@ FactoryGirl.define do
 
   factory :artifact do
     title "New Artifact"
-    #user
+    user
     sample File.open('spec/support/temp.jpg')
   end
 end
