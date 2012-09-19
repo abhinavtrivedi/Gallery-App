@@ -1,13 +1,20 @@
-<% provide(:title, @artifact.title) %>
+<% provide(:title, 'Place your bid') %>
 <h1><%= @artifact.title %> by <%= @artifact.user.name %></h1>
+
 <%= image_tag @artifact.sample.url :medium %>
 <li>Created by:  <%= link_to @artifact.user.name, @artifact.user %></li>
+
 <% if @artifact.bid_price.nil? %>
     No Bids Recorded yet
 <% else %>
     Current Bid: <%= @artifact.bid_price %>
-    Bid By: <%= User.find(@artifact.bid_user_id).name  %> about <%= time_ago_in_words(@artifact.bid_at) %> ago
 <% end %>
 <% if !current_user?(@artifact.user) %>
-    <%= link_to 'Make a new bid', edit_bid_path(@artifact) %>
+    <%= form_for(@artifact, :url => "/mybid/#{@artifact.id}") do |f| %>
+        <%= f.hidden_field :id %>
+        <%= f.label :bid_price %>
+        <%= f.text_field :bid_price %>
+
+        <%= f.submit "Place my bid", class: "btn btn-large btn-primary" %>
+    <% end %>
 <% end %>

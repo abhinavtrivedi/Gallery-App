@@ -5,5 +5,5 @@
   <li><%= @artifact.description %></li>
   <li>$ <%= @artifact.price %></li>
   <li>Created by:  <%= link_to @artifact.user.name, @artifact.user %></li>
-  <%= link_to 'Make a bid', bid_path(@artifact) %>
+  <%= link_to 'Show Bids', bid_path(@artifact) %>
 </ul>

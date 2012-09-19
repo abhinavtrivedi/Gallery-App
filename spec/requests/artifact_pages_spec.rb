@@ -122,6 +122,6 @@ describe "Artifact Pages" do
     it {should have_selector('img')}
 
     it {should have_link(artifact.user.name)}
-    it {should have_link('Make a bid')}
+    it {should have_link('Show Bids')}
   end
 end
