@@ -12,5 +12,6 @@ FactoryGirl.define do
     sample File.open('spec/support/temp.jpg')
     description "This is a new Artifact"
     price 100
+    bid_price nil
   end
 end

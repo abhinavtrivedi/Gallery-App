@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120918170835) do
+ActiveRecord::Schema.define(:version => 20120918235956) do
 
   create_table "artifacts", :force => true do |t|
     t.string   "title"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20120918170835) do
     t.datetime "sample_updated_at"
     t.string   "description"
     t.integer  "price"
+    t.integer  "bid_price"
   end
 
   add_index "artifacts", ["user_id"], :name => "index_artifacts_on_user_id"

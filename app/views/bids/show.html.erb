@@ -1,0 +1,12 @@
+<% provide(:title, @artifact.title) %>
+<h1><%= @artifact.title %> by <%= @artifact.user.name %></h1>
+<%= image_tag @artifact.sample.url :medium %>
+<li>Created by:  <%= link_to @artifact.user.name, @artifact.user %></li>
+<% if @artifact.bid_price.nil? %>
+    No Bids Recorded yet
+<% else %>
+    Current Bid: <%= @artifact.bid_price %>
+<% end %>
+<% if current_user != @artifact.user %>
+    <%= link_to 'Make a new bid', @artifact %>
+<% end %>
