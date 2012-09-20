@@ -30,6 +30,10 @@ textarea {
   text-align: center;
 }
 
+.right {
+  text-align: right;
+}
+
 .center h1 {
   margin-bottom: 10px;
 }
@@ -45,14 +49,14 @@ h1 {
   text-align: center;
 }
 
-h2 {
+/*h2 {
   font-size: 1.7em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
   color: #999;
-}
+}*/
 
 p {
   font-size: 1.1em;
@@ -186,3 +190,43 @@ input, textarea, select, .uneditable-input {
     }
   }
 }
+
+/* artifacts */
+
+.artifact {
+
+  h1 {
+    margin: 0px 0px 20px 0px;
+  }
+
+  margin-right: 0px;
+
+  .image {
+    border: 10px solid #bbb;
+    border-radius:15px;
+    margin-bottom: 5px;
+  }
+  ul {
+    list-style: none;
+  }
+  .description {
+    float: left;
+    font-size: 18px;
+    font-style: italic;
+    font-family: Verdana;
+    width: 100%;
+    margin: 20px 0px 20px 0px;
+    padding: 5px 0px 5px 0px;
+  }
+
+  .footnote {
+    color: $grayLight;
+  }
+
+}
+
+.bidpanel div {
+  margin: 10px 0px 10px 0px;
+  text-align: center;
+}
+

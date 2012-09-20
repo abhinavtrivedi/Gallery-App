@@ -1,9 +1,23 @@
 <% provide(:title, @artifact.title) %>
-<h1><%= @artifact.title %> by <%= @artifact.user.name %></h1>
-<%= image_tag @artifact.sample.url :medium %>
-<ul>
-  <li><%= @artifact.description %></li>
-  <li>$ <%= @artifact.price %></li>
-  <li>Created by:  <%= link_to @artifact.user.name, @artifact.user %></li>
-  <%= link_to 'Show Bids', bid_path(@artifact) %>
-</ul>
+<div class="artifact">
+  <h1><%= @artifact.title %> by <%= @artifact.user.name %></h1>
+    <div class="image">
+        <%= image_tag @artifact.sample.url %>
+    </div>
+  <div class="footnote center">
+    Published by <%= link_to @artifact.user.name, @artifact.user %> <%= distance_of_time_in_words_to_now(@artifact.created_at) %> ago
+  </div>
+
+    <% if !@artifact.description.nil? %>
+        <div class="description center">
+          "<%= @artifact.description %>"
+        </div>
+    <% end %>
+
+  <div class="right">
+    <form action="<%= bid_path(@artifact) %>" method="get">
+      <input class="btn btn-large btn-primary" type="submit" value="Make a bid">
+    </form>
+  </div>
+
+</div>

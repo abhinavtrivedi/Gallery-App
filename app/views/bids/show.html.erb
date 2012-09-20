@@ -1,13 +1,46 @@
 <% provide(:title, @artifact.title) %>
 <h1><%= @artifact.title %> by <%= @artifact.user.name %></h1>
-<%= image_tag @artifact.sample.url :medium %>
-<li>Created by:  <%= link_to @artifact.user.name, @artifact.user %></li>
-<% if @artifact.bid_price.nil? %>
-    No Bids Recorded yet
-<% else %>
-    Current Bid: <%= @artifact.bid_price %>
-    Bid By: <%= User.find(@artifact.bid_user_id).name  %> about <%= time_ago_in_words(@artifact.bid_at) %> ago
-<% end %>
-<% if !current_user?(@artifact.user) %>
-    <%= link_to 'Make a new bid', edit_bid_path(@artifact) %>
-<% end %>
+<div class="row">
+  <div class="span6 center">
+    <%= image_tag @artifact.sample.url :medium %>
+  </div>
+  <div class="span6 bidpanel">
+    <div class="row">
+      <div class="span6"><h2>Starting Price: <%= @artifact.price %></h2></div>
+    </div>
+    <% if @artifact.bid_price.nil? %>
+    <div class="row">
+      <div class="span6">
+        <h2>No Bids placed</h2>
+      </div>
+    </div>
+    <% else %>
+    <div class="row">
+      <div class="span6 center">
+        <h2>Current Bid Price: <strong><%= @artifact.bid_price %></strong></h2>
+        <small>by <%= User.find(@artifact.bid_user_id).name  %> <%= time_ago_in_words(@artifact.bid_at) %> ago</small>
+      </div>
+    </div>
+    <% end %>
+
+    <% if @artifact.user != current_user %>
+    <div class="row">
+      <div class="span6 center">
+        <%= form_for @artifact, :method => :put, html: {class: 'form-inline'} do |f| %>
+            <%= f.text_field :bid_price, class: 'input-small', value: "" %>
+            <%= f.submit 'Place your bid', class: 'btn btn-success' %>
+            <span class="help-block">
+          Bid must be higher than
+              <% if @artifact.bid_price.nil? %>
+            Starting Price
+          <% else %>
+            Current Bid
+          <% end %>
+        </span>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<div class="pull-right"><%= link_to 'Back to artifact', artifact_path(@artifact) %></div>
