@@ -28,7 +28,6 @@ describe "Bid Pages" do
       it {should have_selector('title', text: artifact.title)}
       it {should have_selector('h1', text: artifact.title)}
       it {should have_selector('h1', text: artifact.user.name)}
-      it {should have_link(bid_link)}
     end
 
     describe "when no bids have been made" do
@@ -38,7 +37,7 @@ describe "Bid Pages" do
         visit bid_path(artifact)
       end
 
-      it {should have_content('No Bids Recorded yet')}
+      it {should have_content('No Bids placed')}
     end
 
 =begin

@@ -116,12 +116,12 @@ describe "Artifact Pages" do
 
     it {should have_selector('title', text: artifact.title)}
     it {should have_selector('h1', text: artifact.title)}
-    it {should have_selector('li', text: artifact.description)}
+    it {should have_content(artifact.description)}
     it {should have_selector('li', integer: artifact.price)}
     it {should have_selector('h1', text: artifact.user.name)}
     it {should have_selector('img')}
 
     it {should have_link(artifact.user.name)}
-    it {should have_link('Show Bids')}
+    it {should have_button('Make a bid')}
   end
 end
