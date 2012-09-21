@@ -3,10 +3,10 @@ class ArtifactsController < ApplicationController
   #before_filter :correct_user, only: [:new, :create]
 
   def index
-    if @user.nil?
+    if params[:id].nil?
       @artifacts = Artifact.all
     else
-      @artifacts = @user.artifacts
+      @artifacts = User.find(params[:id]).artifacts
     end
   end
 

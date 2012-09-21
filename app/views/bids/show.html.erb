@@ -4,20 +4,17 @@
   <div class="span6 center">
     <%= image_tag @artifact.sample.url :medium %>
   </div>
-  <div class="span6 bidpanel">
-    <div class="row">
-      <div class="span6"><h2>Starting Price: <%= @artifact.price %></h2></div>
-    </div>
+  <div class="span4 offset1">
     <% if @artifact.bid_price.nil? %>
-    <div class="row">
-      <div class="span6">
-        <h2>No Bids placed</h2>
+    <div class="row bidpanel">
+      <div class="span4 center">
+        <h1 class="muted">No Bids placed</h1>
       </div>
     </div>
     <% else %>
     <div class="row">
-      <div class="span6 center">
-        <h2>Current Bid Price: <strong><%= @artifact.bid_price %></strong></h2>
+      <div class="span4 center">
+        <h1>$<%= @artifact.bid_price %></strong></h1>
         <small>by <%= User.find(@artifact.bid_user_id).name  %> <%= time_ago_in_words(@artifact.bid_at) %> ago</small>
       </div>
     </div>
@@ -25,16 +22,16 @@
 
     <% if @artifact.user != current_user %>
     <div class="row">
-      <div class="span6 center">
+      <div class="span4 center">
         <%= form_for @artifact, :method => :put, html: {class: 'form-inline'} do |f| %>
             <%= f.text_field :bid_price, class: 'input-small', value: "" %>
             <%= f.submit 'Place your bid', class: 'btn btn-success' %>
             <span class="help-block">
           Bid must be higher than
               <% if @artifact.bid_price.nil? %>
-            Starting Price
+            Starting Price of <strong>$<%= @artifact.price %></strong>
           <% else %>
-            Current Bid
+            Current Bid of $<%= @artifact.bid_price %>
           <% end %>
         </span>
         <% end %>

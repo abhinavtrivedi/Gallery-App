@@ -5,10 +5,9 @@
       <nav>
         <ul class="nav pull-right">
           <% if signed_in? %>
-              <li><%= link_to "Users", users_path %></li>
               <li id="fat-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <%= current_user.name %> <b class="caret"></b>
+                  <i class="icon-user icon-white"></i> <%= current_user.name %> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "Profile", current_user %></li>

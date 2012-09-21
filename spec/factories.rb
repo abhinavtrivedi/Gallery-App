@@ -14,4 +14,9 @@ FactoryGirl.define do
     price 100
     bid_price nil
   end
+
+  factory :comment do
+    comment_text "This is a new comment"
+    artifact
+  end
 end

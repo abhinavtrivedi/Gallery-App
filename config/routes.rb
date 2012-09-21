@@ -1,12 +1,18 @@
 GalleryApp::Application.routes.draw do
+  get "comments/new"
+
   #get "bids/new"
 
   #get "artifacts/new"
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :artifacts
+  resources :artifacts do
+    resources :comments
+  end
   resources :bids, only: [:new, :show, :edit, :update]
+
+
 
   root to: 'static_pages#home'
   #get "static_pages/home"

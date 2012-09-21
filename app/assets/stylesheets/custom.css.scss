@@ -225,8 +225,30 @@ input, textarea, select, .uneditable-input {
 
 }
 
-.bidpanel div {
-  margin: 10px 0px 10px 0px;
-  text-align: center;
+.bidpanel {
+  border: 1px solid;
+  margin-left: 10px;
+  div {
+    margin: 10px 0px 10px 0px;
+    text-align: center;
+  }
+}
+
+.comments {
+  border-top: 1px solid $grayLighter;
+  //border-bottom: 1px solid $grayLighter;
+}
+
+.comment {
+  &:first-child {
+    border-top: 1px solid $grayLighter;
+    margin-top: 10px;
+  }
+  margin-top: 5px;
+  margin-bottom: 5px;
+  &:last-child {
+    border-bottom: 1px solid $grayLighter;
+    margin-bottom: 10px;
+  }
 }
 

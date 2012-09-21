@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919011732) do
+ActiveRecord::Schema.define(:version => 20120921100650) do
 
   create_table "artifacts", :force => true do |t|
     t.string   "title"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(:version => 20120919011732) do
   end
 
   add_index "artifacts", ["user_id"], :name => "index_artifacts_on_user_id"
+
+  create_table "comments", :force => true do |t|
+    t.string   "comment_text"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "artifact_id"
+    t.string   "user_id"
+  end
+
+  add_index "comments", ["artifact_id"], :name => "index_comments_on_artifact_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

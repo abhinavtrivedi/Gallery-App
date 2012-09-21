@@ -1,8 +1,8 @@
 <% provide(:title, @artifact.title) %>
 <div class="artifact">
-  <h1><%= @artifact.title %> by <%= @artifact.user.name %></h1>
-    <div class="image">
-        <%= image_tag @artifact.sample.url %>
+  <h1><%= @artifact.title %></h1>
+    <div>
+        <%= image_tag @artifact.sample.url,  class:'image'%>
     </div>
   <div class="footnote center">
     Published by <%= link_to @artifact.user.name, @artifact.user %> <%= distance_of_time_in_words_to_now(@artifact.created_at) %> ago
@@ -19,5 +19,38 @@
       <input class="btn btn-large btn-primary" type="submit" value="Make a bid">
     </form>
   </div>
+
+  <div class="row">
+    <div class="span12">
+      <h2>Comments</h2>
+    </div>
+    <div class="row_fluid">
+      <% if @artifact.comments.empty? %>
+          <div class="span12">
+            <p class="muted">Be the first to comment</p>
+          </div>
+      <% else %>
+          <% @artifact.comments.each do |comment|  %>
+              <div class="span12 comment">
+                <i class="icon-user"></i> <%= comment.user.name %> <em>"<%= comment.comment_text %>"</em>
+                <span class="muted"><%= time_ago_in_words(comment.created_at) %> ago</span>
+
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="span12">
+      <% if signed_in? %>
+          <%= form_for([@artifact, @artifact.comments.build]) do |f|%>
+            <%= f.text_area :comment_text, rows: 2 %>
+            <%= f.submit 'Post', class: 'btn btn-small' %>
+          <% end %>
+      <% else %>
+        <%= link_to 'Sign in', signin_path %> to comment
+      <% end %>
+    </div>
+
+  </div>
+
 
 </div>
