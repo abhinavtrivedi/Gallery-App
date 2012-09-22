@@ -18,6 +18,7 @@ class ArtifactsController < ApplicationController
     @artifact = Artifact.new(params[:artifact])
     @artifact.user = current_user
     if @artifact.save
+      User.increment_counter(:artifact_count, current_user.id)
       redirect_to @artifact
     else
       render 'new'
