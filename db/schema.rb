@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(:version => 20120922075222) do
     t.integer  "artist_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
-    t.string   "user_id"
+    t.integer   "user_id"
     t.string   "sample_file_name"
     t.string   "sample_content_type"
     t.integer  "sample_file_size"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20120922075222) do
     t.string   "comment_text"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.string   "artifact_id"
-    t.string   "user_id"
+    t.integer   "artifact_id"
+    t.integer   "user_id"
   end
 
   add_index "comments", ["artifact_id"], :name => "index_comments_on_artifact_id"
