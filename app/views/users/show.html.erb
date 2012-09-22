@@ -5,10 +5,52 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
+
       </h1>
-      <ul>
-        <li><%= link_to 'My Gallery', artifacts_path(@user) %></li>
-      </ul>
     </section>
   </aside>
+  <div class="span3 offset5">
+    <%= link_to 'Create new artifact', new_artifact_path, class: 'btn btn-large btn-primary' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#newArtTab" data-toggle="tab">New Artifacts</a></li>
+        <li><a href="#popArt" data-toggle="tab">Popular Artifacts</a></li>
+        <li><a href="#latestBidArt" data-toggle="tab">Latest Bid Artifacts</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="newArtTab">
+          <% if @user.artifact_count.nil? %>
+              <%= link_to 'Create first artifact', new_artifact_path, class: 'btn btn-small' %>
+          <% else %>
+              <ul class="thumbnails">
+                <%= render @new_artifacts %>
+              </ul>
+          <% end %>
+        </div>
+        <div class="tab-pane" id="popArt">
+          <% if @user.artifact_count.nil? %>
+              <%= link_to 'Create first artifact', new_artifact_path, class: 'btn btn-small' %>
+          <% else %>
+              <ul class="thumbnails">
+                <%= render @popular_artifacts %>
+              </ul>
+          <% end %>
+        </div>
+        <div class="tab-pane" id="latestBidArt">
+          <% if @user.artifact_count.nil? %>
+              <%= link_to 'Create first artifact', new_artifact_path, class: 'btn btn-small' %>
+          <% else %>
+              <ul class="thumbnails">
+                <%= render @latest_bid_artifacts %>
+              </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

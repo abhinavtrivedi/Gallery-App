@@ -32,6 +32,8 @@ describe User do
   it {should respond_to :authenticate}
   it {should respond_to :remember_token}
   it {should respond_to :artifacts}
+  it {should respond_to :artifact_count}
+  it {should respond_to :is_admin}
 
   it {should be_valid}
 

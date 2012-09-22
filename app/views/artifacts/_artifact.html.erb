@@ -1,2 +1,17 @@
-<%= image_tag artifact.sample.url :thumb %>
-<%= link_to artifact.title, artifact %>
+<li class="span4">
+  <div class="thumbnail">
+    <%= image_tag artifact.sample.url :medium %>
+    <div class="caption">
+      <h3><%= artifact.title %></h3>
+      <p><%= artifact.user.name %></p>
+      <p class="muted"><%= artifact.comments.count %> <%= 'comment'.pluralize(artifact.comments.count) %></p>
+      <p>
+        <%= link_to 'View Artifact', artifact_path(artifact), class: 'btn btn-small' %>
+        <%= link_to 'Show Bids', bid_path(artifact), class: 'btn btn-small' %>
+      </p>
+    </div>
+
+
+  </div>
+</li>
+

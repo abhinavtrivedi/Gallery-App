@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120921100650) do
+ActiveRecord::Schema.define(:version => 20120922075222) do
 
   create_table "artifacts", :force => true do |t|
     t.string   "title"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20120921100650) do
     t.integer  "bid_price"
     t.datetime "bid_at"
     t.integer  "bid_user_id"
+    t.integer  "comment_count"
   end
 
   add_index "artifacts", ["user_id"], :name => "index_artifacts_on_user_id"
@@ -50,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20120921100650) do
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
     t.string   "remember_token"
+    t.integer  "artifact_count"
+    t.boolean  "is_admin"
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

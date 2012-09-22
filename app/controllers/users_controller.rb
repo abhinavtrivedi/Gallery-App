@@ -39,6 +39,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @new_artifacts = Artifact.find_all_by_user_id(params[:id], order: "created_at DESC")
+    @popular_artifacts = Artifact.find_all_by_user_id(params[:id], order: 'comment_count DESC')
+    @latest_bid_artifacts = Artifact.find_all_by_user_id(params[:id], order: 'bid_at DESC')
   end
   def new
     @user = User.new

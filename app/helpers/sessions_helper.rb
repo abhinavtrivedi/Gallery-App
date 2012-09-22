@@ -71,4 +71,8 @@ module SessionsHelper
       redirect_to signin_url, notice: "Please sign in."
     end
   end
+
+  def admin_user
+    User.find_by_is_admin(true)
+  end
 end

@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
     @comment = @artifact.comments.create(params[:comment])
     @comment.user = current_user
     if @comment.save
+      Artifact.increment_counter(:comment_count, params[:artifact_id])
       redirect_to artifact_path(@artifact)
     else
       flash[:error] = @comment.errors.full_messages

@@ -1,5 +1,7 @@
 GalleryApp::Application.routes.draw do
-  get "comments/new"
+  #get "home/index"
+
+  #get "comments/new"
 
   #get "bids/new"
 
@@ -14,8 +16,8 @@ GalleryApp::Application.routes.draw do
 
 
 
-  root to: 'static_pages#home'
-  #get "static_pages/home"
+  root to: 'home#index'
+  get "static_pages/home"
 
   #get "users/new"
   match '/signup', to: 'users#new'

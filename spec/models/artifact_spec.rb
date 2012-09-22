@@ -19,6 +19,8 @@ describe Artifact do
   it {should respond_to(:price)}
   its(:user) { should == user}
   it {should respond_to :comments}
+  it {should respond_to :comment_count}
+
 
   it {should be_valid}
 
