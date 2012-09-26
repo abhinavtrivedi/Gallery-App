@@ -1,0 +1,5 @@
+<div class="span12 comment">
+  <i class="icon-user"></i> <%= comment.user.name %> <em>"<%= comment.comment_text %>"</em>
+  <span class="muted"><%= time_ago_in_words(comment.created_at) %> ago</span>
+
+</div>
