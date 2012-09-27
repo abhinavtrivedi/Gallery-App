@@ -1,5 +1,4 @@
 class ArtifactsController < ApplicationController
-  respond_to :html, :js
   before_filter :signed_in_user, only: [:new, :create]
   #before_filter :correct_user, only: [:new, :create]
 
@@ -8,6 +7,10 @@ class ArtifactsController < ApplicationController
       @artifacts = Artifact.all
     else
       @artifacts = User.find(params[:id]).artifacts
+      respond_to do |format|
+        format.xml {render :xml => @artifacts}
+        format.html
+      end
     end
   end
 

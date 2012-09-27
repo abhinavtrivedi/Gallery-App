@@ -1,11 +1,13 @@
 <% provide(:title, 'Home') %>
 <div class="row">
   <h1>Welcome to the Gallery App</h1>
-
+  <br>
   <div class="span12">
     <div class="tabbable"> <!-- Only required for left/right tabs -->
       <ul class="nav nav-tabs">
         <li class="active"><a href="#newArtTab" data-toggle="tab">New Artifacts</a></li>
+        <li><a href="#popArt" data-toggle="tab">Popular Artifacts</a></li>
+        <li><a href="#latestBidArt" data-toggle="tab">Latest Bid Artifacts</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="newArtTab">
@@ -13,26 +15,12 @@
             <%= render @new_artifacts %>
           </ul>
         </div>
-      </div>
-    </div>
-    <div class="tabbable"> <!-- Only required for left/right tabs -->
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#popArt" data-toggle="tab">Popular Artifacts</a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="popArt">
+        <div class="tab-pane" id="popArt">
           <ul class="thumbnails">
             <%= render @popular_artifacts %>
           </ul>
         </div>
-      </div>
-    </div>
-    <div class="tabbable"> <!-- Only required for left/right tabs -->
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#latestBidArt" data-toggle="tab">Latest Bid Artifacts</a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="latestBidArt">
+        <div class="tab-pane" id="latestBidArt">
           <ul class="thumbnails">
             <%= render @latest_bid_artifacts %>
           </ul>
