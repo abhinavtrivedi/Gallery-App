@@ -1,6 +1,7 @@
 class Artifact < ActiveRecord::Base
   attr_accessible :title, :sample, :description, :price
   belongs_to :user
+  belongs_to :bid_user, class_name: "User"
   has_many :comments, dependent: :destroy
   has_attached_file :sample, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 

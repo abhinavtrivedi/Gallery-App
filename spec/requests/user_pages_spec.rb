@@ -93,7 +93,6 @@ describe "User Pages" do
     end
 
     it { should have_selector('title', text: user.name) }
-    it {should have_link('My Gallery')}
   end
 
   describe "edit Profile" do

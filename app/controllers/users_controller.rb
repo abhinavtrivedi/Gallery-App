@@ -39,14 +39,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if Rails.env.development?
-      @new_artifacts = Artifact.find_all_by_user_id(params[:id], order: "created_at DESC")
-      @popular_artifacts = Artifact.find_all_by_user_id(params[:id], order: 'comment_count DESC')
-      @latest_bid_artifacts = Artifact.find_all_by_user_id(params[:id], order: 'bid_at DESC')
-    else
+    if Rails.env.production?
       @new_artifacts = Artifact.find_all_by_user_id(params[:id], order: "created_at DESC")
       @popular_artifacts = Artifact.find_all_by_user_id(params[:id], order: 'comment_count DESC NULLS LAST')
       @latest_bid_artifacts = Artifact.find_all_by_user_id(params[:id], order: 'bid_at DESC NULLS LAST')
+    else
+      @new_artifacts = Artifact.find_all_by_user_id(params[:id], order: "created_at DESC")
+      @popular_artifacts = Artifact.find_all_by_user_id(params[:id], order: 'comment_count DESC')
+      @latest_bid_artifacts = Artifact.find_all_by_user_id(params[:id], order: 'bid_at DESC')
     end
 
   end

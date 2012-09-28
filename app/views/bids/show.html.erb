@@ -5,7 +5,7 @@
     <%= image_tag @artifact.sample.url :medium %>
   </div>
   <div class="span4 offset1">
-    <% if @artifact.bid_price.nil? %>
+    <% if @artifact.bid_user.nil? %>
     <div class="row bidpanel">
       <div class="span4 center">
         <h1 class="muted">No Bids placed</h1>
@@ -15,7 +15,7 @@
     <div class="row">
       <div class="span4 center">
         <h1>$<%= @artifact.bid_price %></strong></h1>
-        <small>by <%= User.find(@artifact.bid_user_id).name  %> <%= time_ago_in_words(@artifact.bid_at) %> ago</small>
+        <small>by <%= @artifact.bid_user.name  %> <%= time_ago_in_words(@artifact.bid_at) %> ago</small>
       </div>
     </div>
     <% end %>

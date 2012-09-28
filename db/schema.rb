@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120922075222) do
+ActiveRecord::Schema.define(:version => 20120927075732) do
 
   create_table "artifacts", :force => true do |t|
     t.string   "title"
     t.integer  "artist_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
-    t.integer   "user_id"
+    t.string   "user_id"
     t.string   "sample_file_name"
     t.string   "sample_content_type"
     t.integer  "sample_file_size"
@@ -37,12 +37,23 @@ ActiveRecord::Schema.define(:version => 20120922075222) do
     t.string   "comment_text"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.integer   "artifact_id"
-    t.integer   "user_id"
+    t.string   "artifact_id"
+    t.string   "user_id"
   end
 
   add_index "comments", ["artifact_id"], :name => "index_comments_on_artifact_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "followings", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "followings", ["followed_id"], :name => "index_followings_on_followed_id"
+  add_index "followings", ["follower_id", "followed_id"], :name => "index_followings_on_follower_id_and_followed_id", :unique => true
+  add_index "followings", ["follower_id"], :name => "index_followings_on_follower_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

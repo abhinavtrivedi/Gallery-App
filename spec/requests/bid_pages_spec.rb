@@ -6,7 +6,8 @@ describe "Bid Pages" do
 
   let(:bid_link) {'Make a new bid'}
   let(:signin) {'Sign in'}
-  let(:bid_button) {'Place my bid'}
+  let(:bid_button) {'Place your bid'}
+  let(:bid_price_tag) {'artifact_bid_price'}
 
   describe "show bid" do
     let(:artifact) {FactoryGirl.create(:artifact)}
@@ -67,7 +68,7 @@ describe "Bid Pages" do
     let(:customer) {FactoryGirl.create(:user, name: "John Doe", email: "john@lost.org")}
 
     describe "without sign-in" do
-      before { visit edit_bid_path(artifact)}
+      before { visit bid_path(artifact)}
 
       it {should have_selector('title', text: signin)}
     end
@@ -75,10 +76,10 @@ describe "Bid Pages" do
     describe "page" do
       before do
         sign_in customer
-        visit edit_bid_path(artifact)
+        visit bid_path(artifact)
       end
 
-      it {should have_selector('title', text: 'Place your bid')}
+      it {should have_selector('title', text: artifact.title)}
       it {should have_selector('h1', text: artifact.title)}
       it {should have_selector('h1', text: artifact.user.name)}
       it {should have_button(bid_button)}
@@ -87,7 +88,7 @@ describe "Bid Pages" do
     describe "when no bid entered" do
       before do
         sign_in customer
-        visit edit_bid_path(artifact)
+        visit bid_path(artifact)
         click_button bid_button
       end
 
@@ -103,8 +104,8 @@ describe "Bid Pages" do
       let(:lesser_bid) {artifact.price - 1}
       before do
         sign_in customer
-        visit edit_bid_path(artifact)
-        fill_in 'Bid price', with: lesser_bid
+        visit bid_path(artifact)
+        fill_in bid_price_tag, with: lesser_bid
         click_button bid_button
       end
       let(:new_artifact) {Artifact.find(artifact.id)}
@@ -118,8 +119,8 @@ describe "Bid Pages" do
       let(:correct_bid) {artifact.price + 1}
       before do
         sign_in customer
-        visit edit_bid_path(artifact)
-        fill_in 'Bid price', with: correct_bid
+        visit bid_path(artifact)
+        fill_in bid_price_tag, with: correct_bid
         click_button bid_button
       end
       let(:new_artifact) {Artifact.find(artifact.id)}
@@ -149,10 +150,16 @@ describe "Bid Pages" do
 
   describe "edit current bid" do
     let(:customer) {FactoryGirl.create(:user, name: "John Doe", email: "john@lost.org")}
-    let(:artifact) {FactoryGirl.create(:artifact, :bid_price => 100, :bid_user_id => customer.id)}
+    let(:artifact) {FactoryGirl.create(:artifact)}
+    before do
+      customer.save
+      artifact.bid_price = 100
+      artifact.bid_user = customer
+    end
+
 
     describe "without sign-in" do
-      before { visit edit_bid_path(artifact)}
+      before { visit bid_path(artifact)}
 
       it {should have_selector('title', text: signin)}
     end
@@ -160,13 +167,13 @@ describe "Bid Pages" do
     describe "page" do
       before do
         sign_in customer
-        visit edit_bid_path(artifact)
+        visit bid_path(artifact)
       end
 
-      it {should have_selector('title', text: 'Place your bid')}
+      it {should have_selector('title', text: artifact.title)}
       it {should have_selector('h1', text: artifact.title)}
       it {should have_selector('h1', text: artifact.user.name)}
-      it {should have_content("Current Bid: #{artifact.bid_price}")}
+      it {should have_content(artifact.bid_price)}
       it {should have_button(bid_button)}
     end
 
@@ -174,8 +181,8 @@ describe "Bid Pages" do
       let(:lesser_bid) {artifact.bid_price - 1}
       before do
         sign_in customer
-        visit edit_bid_path(artifact)
-        fill_in 'Bid price', with: lesser_bid
+        visit bid_path(artifact)
+        fill_in bid_price_tag, with: lesser_bid
         click_button bid_button
       end
       let(:new_artifact) {Artifact.find(artifact.id)}
@@ -189,8 +196,8 @@ describe "Bid Pages" do
       let(:correct_bid) {artifact.bid_price + 1}
       before do
         sign_in customer
-        visit edit_bid_path(artifact)
-        fill_in 'Bid price', with: correct_bid
+        visit bid_path(artifact)
+        fill_in bid_price_tag, with: correct_bid
         click_button bid_button
       end
       let(:new_artifact) {Artifact.find(artifact.id)}

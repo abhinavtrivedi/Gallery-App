@@ -16,9 +16,9 @@ class BidsController < ApplicationController
       flash[:error] = "Bid must be higher than artifact price of $#{@artifact.price}"
     elsif @artifact.bid_price.nil?
       @artifact.bid_price = params[:artifact][:bid_price]
-      @artifact.bid_user_id = current_user.id
+      @artifact.bid_user = current_user
       @artifact.bid_at = Time.now
-      comment = @artifact.comments.create(comment_text: "#{@artifact.user.name} placed a bid of $#{@artifact.bid_price}")
+      comment = @artifact.comments.build(comment_text: "#{@artifact.user.name} placed a bid of $#{@artifact.bid_price}")
       comment.user = admin_user
       @artifact.save
       comment.save
@@ -27,12 +27,13 @@ class BidsController < ApplicationController
       flash[:error] = "Your bid price of $#{params[:artifact][:bid_price]} must be higher than current bid of $#{@artifact.bid_price}"
     else
       @artifact.bid_price = params[:artifact][:bid_price]
-      @artifact.bid_user_id = current_user.id
+      @artifact.bid_user = current_user
       @artifact.bid_at = Time.now
-      comment = @artifact.comments.create(comment_text: "#{@artifact.user.name} placed a bid of $#{@artifact.bid_price}")
+      comment = @artifact.comments.build(comment_text: "#{@artifact.user.name} placed a bid of $#{@artifact.bid_price}")
       comment.user = admin_user
-      @artifact.save
       comment.save
+      @artifact.comment_count += 1
+      @artifact.save
       flash[:success] = 'Thank you. Your bid has been recorded.'
     end
     redirect_to bid_path(@artifact)

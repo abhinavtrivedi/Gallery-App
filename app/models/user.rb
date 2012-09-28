@@ -1,20 +1,11 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  password_digest :string(255)
-#
-
 class User < ActiveRecord::Base
 
   attr_accessible :email, :name, :password, :password_confirmation
   has_many :artifacts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :bid_artifacts, class_name: "Artifact"
+  has_many :followed_users, through: :followings, source: :followed
+  has_many :followings, foreign_key: "followed_id", dependent: :destroy
   has_secure_password
 
   validates :name, presence: true

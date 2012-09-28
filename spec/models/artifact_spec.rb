@@ -20,6 +20,8 @@ describe Artifact do
   its(:user) { should == user}
   it {should respond_to :comments}
   it {should respond_to :comment_count}
+  it {should respond_to :bid_user}
+
 
 
   it {should be_valid}
