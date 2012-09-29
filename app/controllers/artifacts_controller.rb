@@ -5,10 +5,14 @@ class ArtifactsController < ApplicationController
   def index
     if params[:id].nil?
       @artifacts = Artifact.all
+      respond_to do |format|
+        format.xml {render xml: @artifacts}
+        format.html
+      end
     else
       @artifacts = User.find(params[:id]).artifacts
       respond_to do |format|
-        format.xml {render :xml => @artifacts}
+        format.xml {render xml: @artifacts}
         format.html
       end
     end

@@ -93,6 +93,17 @@ describe "User Pages" do
     end
 
     it { should have_selector('title', text: user.name) }
+
+    describe "with followings" do
+      let(:other_user) {FactoryGirl.create(:user)}
+      before do
+        other_user.follow!(user)
+        visit user_path(user)
+      end
+
+      it {should have_content('0 Following')}
+      it {should have_content('1 Followers')}
+    end
   end
 
   describe "edit Profile" do

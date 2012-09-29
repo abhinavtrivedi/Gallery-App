@@ -8,6 +8,11 @@
       <p>
         <%= link_to 'View Artifact', artifact_path(artifact), class: 'btn btn-small' %>
         <%= link_to 'Show Bids', bid_path(artifact), class: 'btn btn-small' %>
+        <% if signed_in? %>
+            <%= form_for(current_user.followings.build(followed_id: artifact.user.id), html: {class: 'form-inline'}) do |f| %>
+              <%= f.hidden_field :followed_id %><%= f.submit "Follow", class: "btn btn-small" %>
+            <% end %>
+        <% end %>
       </p>
     </div>
 

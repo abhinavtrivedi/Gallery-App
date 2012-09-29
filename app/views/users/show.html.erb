@@ -5,8 +5,10 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
-
       </h1>
+      <!--<span>Member since <%= time_tag(@user.created_at) %></span>-->
+      <span><%= @user.followers.count %> Followers</span>
+      <span><%= @user.followed_users.count %> Following</span>
     </section>
   </aside>
   <div class="span3 offset5">
